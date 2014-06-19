@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SimpleRealestate.Models.PropertyInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.propertyType == "rent")
+{
+    <h2>Rent</h2>
+}
+else if (ViewBag.propertyType == "sale")
+{
+    <h2>Sale</h2>
+}
+else
+{
+    <h2>All Properties</h2>    
+}
+
+
+<div class="row">
+    <form class="form-inline search-form" role="form" action="@Url.Action("Index", "Home")">
+        <div class="form-group">
+            <label class="sr-only" for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Enter address" value="@ViewBag.address" />
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="inputMinPrice">Min Price</label>
+            <input type="number" class="form-control" id="inputMinPrice" name="minPrice" placeholder="Min Price" value="@ViewBag.minPrice" />
+        </div>
+        <label>~</label>
+        <div class="form-group">
+            <label class="sr-only" for="inputMaxPrice">Max Price</label>
+            <input type="number" class="form-control" id="inputMaxPrice" name="maxPrice" placeholder="Max Price" value="@ViewBag.maxPrice" />
+        </div>
+        <input type="hidden" name="propertyType" value="@ViewBag.propertyType" />
+        <button type="submit" class="btn btn-warning">Search</button>
+    </form>
+</div>
+
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="round box">
+        <div class="media">
+            <a href="@Url.Action("detail", new { id = item.Id })" class="pull-left">
+                <img src="@Url.Content("~/Images/" + item.Photos.First().Name + "")" class="image-thumbnail" />
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@Html.ActionLink(item.Address, "detail", new { id = item.Id })</h4>
+                @Html.DisplayFor(modelItem => item.Description)
+            </div>
+        </div>
+    </div>
+}
+</div>

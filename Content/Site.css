@@ -1,0 +1,90 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.image-thumbnail {
+    max-width:200px;
+    max-height:150px;
+}
+
+.box {
+    padding:20px !important;
+    margin-bottom:10px;
+}
+
+.round {
+    border-radius:3px;
+    padding:3px;
+    background-color:#f4f8fa;
+    border:1px solid #5bc0de;
+}
+
+.title {
+    font-weight:bold;
+    font-size:1.5em;
+    /*color:#5bc0de;*/
+}
+
+.space {
+    padding-top:20px;
+}
+
+.property-detail .form-group{
+    margin-bottom:0 !important;
+}
+
+.property-description {
+    margin-top:10px;
+    
+}
+
+    .property-description p {
+        font-weight: normal;
+    }
+
+#EnquiryInput_Email{
+    width:100% !important;
+}
+
+.search-form {
+    margin-bottom:20px;
+}

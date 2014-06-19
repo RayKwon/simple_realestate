@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Your enquiry has sent successfully.</h2>
+    <a href="@Url.Action("detail", new { id = ViewBag.PropertyId })" class="btn btn-primary">Go Back to the detail page</a>
+</div>
+
+

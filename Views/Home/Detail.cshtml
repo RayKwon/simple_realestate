@@ -1,0 +1,113 @@
+﻿@using SimpleRealestate.Models
+@model SimpleRealestate.Models.PropertyInfo
+
+
+@{
+    ViewBag.Title = "ShowDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row space">
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading title">@Model.Address</div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @for (int i = 0; i < Model.Photos.Count(); i++)
+                    {
+                        <li data-target="#carousel-example-generic" data-slide-to="@i" class="@if(i==0){<text>active</text>}"></li>
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @for (int i = 0; i < Model.Photos.Count(); i++)
+                    {
+                        <div class="item @if (i==0){<text>active</text>}">
+                            <img src="@Url.Content("~/Images/" + Model.Photos[i].Name + "")" />
+                        </div>
+                    }
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            <div class="panel-footer">
+                <div>
+                    <div>
+                        <label class="col-sm-3 ">Price:</label>
+                        <label class="col-sm-9">$@Model.Price.ToString("###,###,###,###")</label>
+                    </div>
+                    @if (Model.PropertyType == PropertyType.Rent)
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3">Bond:</label>
+                            <label class="col-sm-9">$@Model.Bond.ToString("###,###,###,###")</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3">Available Date:</label>
+                            <label class="col-sm-9">@Model.AvailableDate.ToString("dd/mm/yyyy")</label>
+                        </div>
+                    }
+                    @if (Model.PropertyType == PropertyType.Sale)
+                    {
+                        <div>
+                            <label class="col-sm-3">Aunction Date:</label>
+                            <label class="col-sm-9">@Model.AuctionDate.ToString("dd/MM/yyyy")</label>
+                        </div>
+                    }
+                    <div class="property-description">
+                        <div class="col-sm-12">
+                            <p>@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="title">@Model.Agent.Name</div>
+                <div>@Model.Agent.Phone, @Model.Agent.Email</div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("enquire", "Home", new { Id= Model.Id }))
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(false)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EnquiryInput.Email, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.EnquiryInput.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EnquiryInput.Comment, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(model => model.EnquiryInput.Comment, new { @class = "form-control", rows = 6 })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-7">
+                                <input type="submit" value="Enquire about this property" class="btn btn-warning" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
